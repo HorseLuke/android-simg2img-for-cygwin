@@ -17,6 +17,20 @@ $ file /output/path/system.raw.img
 system.raw.img: Linux rev 1.0 ext4 filesystem data, UUID=57f8f4bc-abf4-655f-bf67-946fc0f9f25b (extents) (large files)
 ```
 
+
+Windows Cygwin
+-------
+
+Branch `master-cygwin-port` is port to Cygwin. 
+
+It use some hacks, so can not back ported to origin branch. Sorry for the origin repo. 
+
+Make sure you have zlib and libasprintf added in cygwin setup exe.
+
+Then just use `make` to build simg2img.
+
+
+
 Windows
 -------
 
