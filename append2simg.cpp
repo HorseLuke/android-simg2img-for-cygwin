@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+/*
+asprintf is part of stdio.h, but you need to add #define _GNU_SOURCE at the top of your file and use -std=gnu99 when compiling.
+https://stackoverflow.com/questions/61306157/unable-to-compile-program-due-to-function-asprintf
+*/
+#define _GNU_SOURCE
+
 #define _FILE_OFFSET_BITS 64
 #define _LARGEFILE64_SOURCE 1
 
@@ -28,6 +34,7 @@
 #include "backed_block.h"
 #include "sparse_file.h"
 
+/*
 #ifndef O_BINARY
 #define O_BINARY 0
 #endif
@@ -36,6 +43,13 @@
 #define lseek64 lseek
 #define off64_t off_t
 #endif
+
+*/
+
+#include <sys/mman.h>
+#define lseek64 lseek
+#define off64_t off_t
+
 
 void usage() {
   fprintf(stderr, "Usage: append2simg <output> <input>\n");

@@ -28,9 +28,13 @@
 
 #include <sparse/sparse.h>
 
+/*
 #ifndef O_BINARY
 #define O_BINARY 0
 #endif
+*/
+
+#include <sys/mman.h>
 
 void usage() {
   fprintf(stderr, "Usage: simg2simg <sparse image file> <sparse_image_file> <max_size>\n");

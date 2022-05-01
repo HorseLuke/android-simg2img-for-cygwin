@@ -85,6 +85,8 @@ unsigned int sparse_count_chunks(struct sparse_file* s) {
     chunks++;
   }
 
+  fprintf(stdout, "sparse_count_chunks result: %u\n", chunks);
+
   return chunks;
 }
 
@@ -123,8 +125,14 @@ static int write_all_blocks(struct sparse_file* s, struct output_file* out) {
       write_skip_chunk(out, (int64_t)blocks * s->block_size);
     }
     ret = sparse_file_write_block(out, bb);
+
+    fprintf(stdout, "sparse_file_write_block result: %d\n", ret);
+
     if (ret) return ret;
     last_block = backed_block_block(bb) + DIV_ROUND_UP(backed_block_len(bb), s->block_size);
+
+    fprintf(stdout, "write_all_blocks now in last_block: %u\n", last_block);
+
   }
 
   pad = s->len - (int64_t)last_block * s->block_size;

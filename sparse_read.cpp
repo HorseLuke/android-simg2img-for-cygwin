@@ -37,10 +37,15 @@
 #include "sparse_file.h"
 #include "sparse_format.h"
 
+/*
 #if defined(__APPLE__) && defined(__MACH__)
 #define lseek64 lseek
 #define off64_t off_t
 #endif
+*/
+
+#define lseek64 lseek
+#define off64_t off_t
 
 #define SPARSE_HEADER_MAJOR_VER 1
 #define SPARSE_HEADER_LEN (sizeof(sparse_header_t))

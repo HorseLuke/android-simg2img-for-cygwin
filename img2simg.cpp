@@ -28,14 +28,21 @@
 
 #include <sparse/sparse.h>
 
+/*
 #ifndef O_BINARY
 #define O_BINARY 0
 #endif
+
 
 #if defined(__APPLE__) && defined(__MACH__)
 #define lseek64 lseek
 #define off64_t off_t
 #endif
+*/
+
+#include <sys/mman.h>
+#define lseek64 lseek
+#define off64_t off_t
 
 void usage() {
   fprintf(stderr, "Usage: img2simg <raw_image_file> <sparse_image_file> [<block_size>]\n");

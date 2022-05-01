@@ -34,6 +34,7 @@
 #include "sparse_crc32.h"
 #include "sparse_format.h"
 
+/*
 #ifndef _WIN32
 #include <sys/mman.h>
 #define O_BINARY 0
@@ -47,6 +48,16 @@
 #define mmap64 mmap
 #define off64_t off_t
 #endif
+*/
+
+#define _WIN32 1
+#include <sys/mman.h>
+#define lseek64 lseek
+#define ftruncate64 ftruncate
+#define mmap64 mmap
+#define off64_t off_t
+
+
 
 #define min(a, b)        \
   ({                     \
@@ -670,6 +681,9 @@ int write_fd_chunk(struct output_file* out, unsigned int len, int fd, int64_t of
   }
   ptr = data + aligned_diff;
 #else
+  if (buffer_size > SIZE_MAX){
+    fprintf(stderr, "warning buffer_size (%lu) > SIZE_MAX (%lu) \n", buffer_size, SIZE_MAX);
+  }
   off64_t pos;
   char* data = reinterpret_cast<char*>(malloc(len));
   if (!data) {
